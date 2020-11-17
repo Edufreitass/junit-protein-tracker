@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
 public class TrackingServiceTests {
 
@@ -39,6 +40,7 @@ public class TrackingServiceTests {
 	}
 
 	@Test
+	@Ignore
 	public void testWhenAddingProteinTotalIncreaseByThatAmount() {
 		service.addProtein(10);
 		assertEquals("Protein amount was not correct", 10, service.getTotal());
