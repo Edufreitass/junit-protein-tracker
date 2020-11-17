@@ -2,6 +2,7 @@ package com.simpleprogrammer.proteintracker;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -12,6 +13,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Rule;
 
 public class TrackingServiceTests {
 
@@ -61,9 +63,12 @@ public class TrackingServiceTests {
 		assertEquals(0, service.getTotal());
 	}
 
-	@Test(expected = InvalidGoalException.class)
+	@Test //(expected = InvalidGoalException.class)
 	public void testWhenGoalIsSetToLessThanZeroExceptionIsThrown() throws InvalidGoalException {
-		service.setGoal(-5);
+		InvalidGoalException thrown = assertThrows(
+				InvalidGoalException.class, 
+				() -> service.setGoal(-5));
+		assertEquals("Goal was less than zero!", thrown.getMessage());
 	}
 
 	@Test(timeout = 500)
