@@ -3,6 +3,7 @@ package com.simpleprogrammer.proteintracker;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 
 public class TrackingServiceTests {
@@ -15,6 +16,11 @@ public class TrackingServiceTests {
 		service = new TrackingService();
 	}
 
+	@After
+	public void tearDown() {
+		System.out.println("After...");
+	}
+	
 	@Test
 	public void testNewTrackingServiceTotalIsZero() {
 		assertEquals("Tracking service total was not zero", 0, service.getTotal());
