@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,7 +49,9 @@ public class TrackingServiceTests {
 	@Category(GoodTestsCategory.class)
 	public void testWhenAddingProteinTotalIncreaseByThatAmount() {
 		service.addProtein(10);
-		assertEquals("Protein amount was not correct", 10, service.getTotal());
+//		assertEquals("Protein amount was not correct", 10, service.getTotal());
+//		assertThat(service.getTotal(), is(10));
+		assertThat(service.getTotal(), allOf(is(10), instanceOf(Integer.class)));
 	}
 
 	@Test
