@@ -21,7 +21,7 @@ public class TrackingServiceTheories {
 	
 	@Theory
 	public void positiveValuesShouldAlwaysHavePositiveTotals(int value) {
-		TrackingService service = new TrackingService();
+		TrackingService service = new TrackingService(new NotifierStub());
 		service.addProtein(value);
 		
 		Assume.assumeTrue(value > 0);

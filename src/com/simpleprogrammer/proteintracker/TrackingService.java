@@ -11,6 +11,10 @@ public class TrackingService {
 	private int historyId = 0;
 	private Notifier notifier;
 
+	public TrackingService(Notifier notifier) {
+		this.notifier = notifier;
+	}
+	
 	public int getTotal() {
 		return total;
 	}

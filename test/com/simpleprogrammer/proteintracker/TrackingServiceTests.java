@@ -32,7 +32,7 @@ public class TrackingServiceTests {
 	@Before
 	public void setUp() {
 		System.out.println("Before...");
-		service = new TrackingService();
+		service = new TrackingService(new NotifierStub());
 	}
 
 	@After
@@ -71,9 +71,9 @@ public class TrackingServiceTests {
 		assertEquals("Goal was less than zero!", thrown.getMessage());
 	}
 
-	@Test(timeout = 500)
+	@Test(timeout = 3000)
 	public void badTest() {
-		for (int i = 0; i < 10000000; i++) {
+		for (int i = 0; i < 1000; i++) {
 			service.addProtein(1);
 		}
 	}
