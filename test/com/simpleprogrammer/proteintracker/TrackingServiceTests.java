@@ -62,6 +62,15 @@ public class TrackingServiceTests {
 		service.removeProtein(5);
 		assertEquals(0, service.getTotal());
 	}
+	
+	@Test
+	public void testWhenGoalIsMetHistoryIsUpdated() throws InvalidGoalException {
+		service.setGoal(5);
+		service.addProtein(6);
+		
+		HistoryItem result = service.getHistory().get(1);
+		assertEquals("sent: goal met", result.getOperation());
+	}
 
 	@Test //(expected = InvalidGoalException.class)
 	public void testWhenGoalIsSetToLessThanZeroExceptionIsThrown() throws InvalidGoalException {
