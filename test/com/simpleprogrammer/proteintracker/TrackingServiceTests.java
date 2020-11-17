@@ -1,6 +1,8 @@
 package com.simpleprogrammer.proteintracker;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -35,18 +37,21 @@ public class TrackingServiceTests {
 	}
 
 	@Test
+	@Category({GoodTestsCategory.class, BadCategory.class})
 	public void testNewTrackingServiceTotalIsZero() {
 		assertEquals("Tracking service total was not zero", 0, service.getTotal());
 	}
 
 	@Test
 //	@Ignore
+	@Category(GoodTestsCategory.class)
 	public void testWhenAddingProteinTotalIncreaseByThatAmount() {
 		service.addProtein(10);
 		assertEquals("Protein amount was not correct", 10, service.getTotal());
 	}
 
 	@Test
+	@Category(GoodTestsCategory.class)
 	public void testWhenRemovingProteinTotalRemainsZero() {
 		service.removeProtein(5);
 		assertEquals(0, service.getTotal());
