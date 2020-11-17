@@ -2,9 +2,12 @@ package com.simpleprogrammer.proteintracker;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
+
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -12,8 +15,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Rule;
 
 public class TrackingServiceTests {
 
@@ -65,11 +66,23 @@ public class TrackingServiceTests {
 	
 	@Test
 	public void testWhenGoalIsMetHistoryIsUpdated() throws InvalidGoalException {
+		
+		Mockery context = new Mockery();
+		final Notifier mockNotifier = context.mock(Notifier.class);
+		service = new TrackingService(mockNotifier);
+		
+		context.checking(new Expectations() {{
+			oneOf(mockNotifier).send("goal met");
+			will(returnValue(true));
+		}});
+		
 		service.setGoal(5);
 		service.addProtein(6);
 		
 		HistoryItem result = service.getHistory().get(1);
 		assertEquals("sent: goal met", result.getOperation());
+		
+		context.assertIsSatisfied();
 	}
 
 	@Test //(expected = InvalidGoalException.class)
