@@ -4,12 +4,24 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class TrackingServiceTests {
 
 	private TrackingService service;
 
+	@BeforeClass
+	public static void before() {
+		System.out.println("Before Class...");
+	}
+	
+	@AfterClass
+	public static void after() {
+		System.out.println("After Class...");
+	}
+	
 	@Before
 	public void setUp() {
 		System.out.println("Before...");
